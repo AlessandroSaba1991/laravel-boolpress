@@ -9279,6 +9279,14 @@ body {
   vertical-align: text-bottom;
 }
 
+.bg_suc {
+  background-color: palegreen;
+}
+
+.bg_dan {
+  background-color: palegoldenrod;
+}
+
 /*
  * Sidebar
  */

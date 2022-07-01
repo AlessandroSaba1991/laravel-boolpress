@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\AdminMessageAnswer;
+use Illuminate\Support\Facades\Mail;
 
 class MessageController extends Controller
 {
@@ -15,7 +17,8 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        $messages = Message::all()->sortDesc();
+        return view('admin.messages.index',compact('messages'));
     }
 
     /**
@@ -36,7 +39,11 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['status']= 'Sent';
+        $message = Message::create($data);
+        Mail::to($message->email)->send(new AdminMessageAnswer($message));
+        return redirect()->route('admin.messages.index')->with('status','Answer send successfully');
     }
 
     /**
@@ -47,7 +54,7 @@ class MessageController extends Controller
      */
     public function show(Message $message)
     {
-        //
+        return view('admin.messages.show',compact('message'));
     }
 
     /**
@@ -81,6 +88,7 @@ class MessageController extends Controller
      */
     public function destroy(Message $message)
     {
-        //
+        $message->delete();
+        return redirect()->back()->with('status',"Message '$message->subject' was successfully delete");
     }
 }

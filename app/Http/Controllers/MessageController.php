@@ -24,6 +24,7 @@ class MessageController extends Controller
             'email' => 'required|max:70',
             'message' => 'required'
         ]);
+        $validate_data['status']= 'Received';
         $message = Message::create($validate_data);
         Mail::to('Admin@boolpress.com')->send(new AdminContactMessage($message));
         Mail::to($message->email)->send(new ContactMessageConfirmation($message));

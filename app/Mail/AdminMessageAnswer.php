@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class AdminContactMessage extends Mailable
+class AdminMessageAnswer extends Mailable
 {
     use Queueable, SerializesModels;
     public $message;
@@ -30,7 +30,7 @@ class AdminContactMessage extends Mailable
     public function build()
     {
         return $this
-        ->subject("Check The New Message from $this->message['full_name']")
-        ->markdown('mail.markdown.admin-contact-message');
+        ->subject('Admin Answer')
+        ->markdown('mail.markdown.admin-message-answer');
     }
 }

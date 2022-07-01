@@ -31,6 +31,7 @@ Route::middleware('auth')->prefix('admin')->namespace('Admin')->name('admin.')->
     Route::resource('tags','TagController')->parameters([
         'tags' => 'tag:slug'
     ])->except(['show','create','edit']);
+    Route::resource('messages','MessageController');
 });
 
 
