@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-
+Route::get('/contact-form','MessageController@show')->name('message.confirmed');
+Route::post('/contact-form','MessageController@store');
 
 Auth::routes();
 

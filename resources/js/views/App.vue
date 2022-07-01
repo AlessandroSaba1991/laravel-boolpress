@@ -65,6 +65,11 @@ export default {
           name: "Posts",
           link: "posts",
         },
+        {
+          id: 4,
+          name: "Contacts",
+          link: "contacts",
+        },
       ],
     };
   },

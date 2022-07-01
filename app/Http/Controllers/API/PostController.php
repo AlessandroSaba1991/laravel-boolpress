@@ -10,11 +10,20 @@ class PostController extends Controller
 {
     public function index()
     {
-        return Post::with(['category','tags','user'])->orderByDesc('id')->paginate(9);
+        return Post::with(['category', 'tags', 'user'])->orderByDesc('id')->paginate(9);
     }
     public function show($slug)
     {
-        $post = Post::with(['category','tags','user'])->where('slug', $slug)->first();
-        return $post;
+        $post = Post::with(['category', 'tags', 'user'])->where('slug', $slug)->first();
+        if ($post) {
+            return $post;
+        } else {
+            return response()->json(
+                [
+                    'status_code' => 404,
+                    'status_message' => 'Page Not Found'
+                ]
+            );
+        }
     }
 }
